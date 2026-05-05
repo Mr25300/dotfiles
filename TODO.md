@@ -1,4 +1,4 @@
-Must install:
+Must install for neovim:
 - Harpoon
 - Theme/Color
 - Vim fugitive
