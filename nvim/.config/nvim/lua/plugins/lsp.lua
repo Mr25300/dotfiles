@@ -16,10 +16,16 @@ return {
         require("mason-lspconfig").setup {
             ensure_installed = {
                 "lua_ls",
+                "bashls",
                 "clangd",
-                "pyright"
+                "pyright",
+                "markdown_oxide"
             }
         }
+
+        vim.lsp.config("bashls", {
+            filetypes = { "sh", "bash", "zsh" }
+        })
 
         local keymap = vim.keymap
 

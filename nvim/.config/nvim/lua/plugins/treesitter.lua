@@ -6,7 +6,17 @@ return {
         highlight = { enable = true },
         indent = { enable = true },
         ensure_installed = {
-            "lua", "bash", "c", "cpp", "python", "html", "javascript", "typescript"
+            "lua",
+            "bash",
+            "zsh",
+            "c",
+            "cpp",
+            "python",
+            "html",
+            "javascript",
+            "typescript",
+            "markdown",
+            "markdown_inline"
         }
     }
 }
