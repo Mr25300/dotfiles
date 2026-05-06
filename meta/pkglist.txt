@@ -16,6 +16,7 @@ fd
 feh
 ffmpegthumbnailer
 firefox
+fzf
 gimp
 git
 gnome-themes-extra
@@ -47,8 +48,8 @@ man-pages
 mpv
 musescore
 neovim
-network-manager-applet
 networkmanager
+network-manager-applet
 nodejs
 noto-fonts-cjk
 noto-fonts-emoji
@@ -57,8 +58,8 @@ nvidia-open-dkms
 nvidia-settings
 nvidia-utils
 nwg-look
-obs-studio
 obsidian
+obs-studio
 openbsd-netcat
 openssh
 otf-font-awesome
@@ -69,10 +70,10 @@ pipewire-jack
 pipewire-pulse
 prismlauncher
 qpwgraph
-qt5-wayland
 qt5ct
-qt6-wayland
+qt5-wayland
 qt6ct
+qt6-wayland
 rclone
 reflector
 ripgrep
@@ -86,6 +87,7 @@ syncthing
 thunar
 thunderbird
 timeshift
+ttf-jetbrains-mono-nerd
 tumbler
 unzip
 waybar
@@ -96,3 +98,5 @@ xdg-desktop-portal-hyprland
 xdg-user-dirs
 zip
 zsh
+zsh-autocomplete
+zsh-syntax-highlighting

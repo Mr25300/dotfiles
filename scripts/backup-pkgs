@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+TARGET_DIR="$DOTFILES/meta"
+mkdir -p "$TARGET_DIR"
+
+echo "Backing up package lists to $TARGET_DIR..."
+
+pacman -Qenq | sort > "$TARGET_DIR/pkglist.txt"
+pacman -Qemq | sort > "$TARGET_DIR/aur_pkglist.txt"
+
+echo "Backup complete."

@@ -4,3 +4,6 @@ Must install for neovim:
 - Vim fugitive
 - Comment/TODO highligher
 - Get autocompletion for lua end and markdown lists working
+
+Miscellaneous todo:
+- Make it so github ssh signing key is added to agent automatically and lasts 10m
