@@ -1,5 +1,6 @@
 return {
     "williamboman/mason-lspconfig.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
         {
             "williamboman/mason.nvim",
@@ -27,8 +28,6 @@ return {
             filetypes = { "sh", "bash", "zsh" }
         })
 
-        local keymap = vim.keymap
-
         vim.api.nvim_create_autocmd("LspAttach", {
             group = vim.api.nvim_create_augroup("UserLspConfig", {}),
             callback = function(event)
@@ -42,6 +41,10 @@ return {
                 map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame variable")
                 map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
                 map("<leader>e", vim.diagnostic.open_float, "Show diagnostic [E]rror")
+
+                map("<leader>f", function()
+                    vim.lsp.buf.format { async = true } -- Fix indentation here
+                end, "[F]ormat Code")
             end
         })
     end

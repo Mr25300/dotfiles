@@ -15,9 +15,23 @@ path=($^path(N-/))
 export PATH
 
 
+# EDITING MODE
+
+set -o vi
+setopt interactivecomments # Allows comments in interactive shell
+
+export KEYTIMEOUT=1 # Reduces wait time after escape
+
+
 # HISTORY
 
-HISTFILE=~/.zsh_history
+ZSH_STATE_DIR="$XDG_STATE_HOME/zsh"
+
+if [[ ! -d "$ZSH_STATE_DIR" ]]; then
+    mkdir -p "$ZSH_STATE_DIR"
+fi
+
+HISTFILE="$ZSH_STATE_DIR/history"
 HISTSIZE=100000
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
@@ -30,16 +44,6 @@ setopt hist_find_no_dups
 setopt hist_ignore_space
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
-
-
-# PROMPT
-
-# PROMPT="[%n@%m %1~]# "
-
-# PURE_GIT_PULL=0
-#
-# autoload -U promptinit; promptinit
-# prompt pure
 
 
 # ALIASES
@@ -55,14 +59,10 @@ alias grep='grep --color=auto'
 
 # Fuzzyfinding
 
-# export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
-
 source <(fzf --zsh)
 # History Search: Ctrl + R
 # File Search: Ctrl + T
 # Directory Jump: Alt + C
-
-setopt interactivecomments
 
 # Theme
 
@@ -76,6 +76,8 @@ source "$ZDOTDIR/p10k.zsh" # Run 'p10k configure' to change
 PLUGINS=/usr/share/zsh/plugins
 
 zstyle ':autocomplete:*' add-semicolon no
+zstyle ':completion:*' list-prompt ''
+zstyle ':completion:*' select-prompt ''
 
 source "$PLUGINS/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 

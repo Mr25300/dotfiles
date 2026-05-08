@@ -1,0 +1,1 @@
+- Global .gitignore should be placed in ~/.config/git/ignore and should have neovim swap files
