@@ -5,11 +5,11 @@ for name, info in pairs(monitors) do
         output = name,
         mode = info.res,
         position = info.pos,
-        transform = info.transform or nil
+        transform = info.transform
     })
 
     for _, num in ipairs(info.workspaces) do
-        hl.workspace_rule({workspace = tostring(num), monitor = info.name})
+        hl.workspace_rule({workspace = tostring(num), monitor = name})
     end
 end
 

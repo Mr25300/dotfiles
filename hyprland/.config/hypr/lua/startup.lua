@@ -15,8 +15,8 @@ local startupCommands = {
     "hyprsunset",
     "hyprpaper",
     "nm-applet",
-    "keepassxc --minimized",
-    {"thunderbird", 10},
+    -- "keepassxc --minimized", -- Maybe move this to systemd
+    {"thunderbird", 10}, -- Make this silent so that it doesnt switch workspaces
     "discord --start-minimized",
     "steam -silent"
 }
@@ -26,11 +26,11 @@ for _, var in ipairs(envVars) do
 end
 
 hl.on("hyprland.start", function()
-    for command in pairs(startupCommands) do
+    for _, command in ipairs(startupCommands) do
         if type(command) == "string" then
             hl.exec_cmd(command)
         else
-            hl.exec_cmd(command[1], command[2])
+            hl.exec_cmd(command[1], {workspace = command[2] .. " silent"})
         end
     end
 end)
