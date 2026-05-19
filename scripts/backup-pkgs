@@ -7,5 +7,6 @@ echo "Backing up package lists to $TARGET_DIR..."
 
 pacman -Qenq | sort > "$TARGET_DIR/pkglist.txt"
 pacman -Qemq | sort > "$TARGET_DIR/aur_pkglist.txt"
+flatpak list --app --columns=application | sort > "$TARGET_DIR/flatpak_pkglist.txt"
 
 echo "Backup complete."

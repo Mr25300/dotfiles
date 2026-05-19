@@ -1,6 +1,11 @@
 local envVars = {
     XCURSOR_SIZE = "24",
     HYPRCURSOR_SIZE = "24",
+
+    -- Remove these if something breaks
+    GDK_BACKEND = "wayland,x11",
+    QT_QPA_PLAFORM = "wayland",
+
     QT_QPA_PLATFORMTHEME = "qt6ct"
 }
 
@@ -13,16 +18,17 @@ local startupCommands = {
     "mako",
     "systemctl --user start hyprpolkitagent",
     "hyprsunset",
-    "hyprpaper",
+    "systemctl --user start hyprpaper",
     "nm-applet",
+    "vorta", -- For home directory backups
     -- "keepassxc --minimized", -- Maybe move this to systemd
-    {"thunderbird", 10}, -- Make this silent so that it doesnt switch workspaces
+    {"tutanota-desktop", 10},
+    {"betterbird", 10}, -- Test this works and is silent
     "discord --start-minimized",
-    "steam -silent"
 }
 
-for _, var in ipairs(envVars) do
-    hl.env(var, envVars[var])
+for var, value in pairs(envVars) do
+    hl.env(var, value)
 end
 
 hl.on("hyprland.start", function()

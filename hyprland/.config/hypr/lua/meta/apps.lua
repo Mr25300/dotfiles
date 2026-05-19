@@ -1,9 +1,9 @@
 return {
     terminal = "kitty",
-    fileManager = "thunar",
+    fileManager = "dolphin",
     menu = "wofi",
     webBrowser = "firefox",
-    mailClient = "thunderbird",
+    mailClient = "betterbird",
     calculator = "kitty",
     mediaPlayer = "spotify-launcher"
 }
