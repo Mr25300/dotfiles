@@ -7,3 +7,4 @@ Must install for neovim:
 
 Miscellaneous todo:
 - Make it so github ssh signing key is added to agent automatically and lasts 10m
+- Make backup-pkgs script run automatically

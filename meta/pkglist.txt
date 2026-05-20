@@ -22,9 +22,11 @@ fzf
 gimp
 git
 gnome-themes-extra
+gnuplot
 grim
 grub
 htop
+hypridle
 hyprland
 hyprlock
 hyprpaper
@@ -43,6 +45,7 @@ linux-firmware
 linux-headers
 linux-lts
 linux-lts-headers
+ly
 mako
 man-db
 man-pages
@@ -73,6 +76,7 @@ pipewire-pulse
 polkit-kde-agent
 prismlauncher
 proton-vpn-cli
+qalculate-gtk
 qpwgraph
 qt5ct
 qt5-wayland

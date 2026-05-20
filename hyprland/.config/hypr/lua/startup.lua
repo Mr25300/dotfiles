@@ -6,7 +6,7 @@ local envVars = {
     GDK_BACKEND = "wayland,x11",
     QT_QPA_PLAFORM = "wayland",
 
-    QT_QPA_PLATFORMTHEME = "qt6ct"
+    QT_QPA_PLATFORMTHEME = "qt6ct",
 }
 
 ---@class StartupCommands
@@ -14,17 +14,20 @@ local envVars = {
 
 ---@type StartupCommands
 local startupCommands = {
-    "waybar",
-    "mako",
+    "systemctl --user start waybar",
+    "systemctl --user start mako",
     "systemctl --user start hyprpolkitagent",
-    "hyprsunset",
+    "systemctl --user start hyprsunset",
     "systemctl --user start hyprpaper",
+    "systemctl --user import-environment SSH_AUTH_SOCK", -- For running ssh-add -D in systemd
+    "systemctl --user start hypridle",
     "nm-applet",
     "vorta", -- For home directory backups
     -- "keepassxc --minimized", -- Maybe move this to systemd
     {"tutanota-desktop", 10},
     {"betterbird", 10}, -- Test this works and is silent
     "discord --start-minimized",
+    "playerctld daemon" -- Allows playerctl to prioritize most recently played players
 }
 
 for var, value in pairs(envVars) do

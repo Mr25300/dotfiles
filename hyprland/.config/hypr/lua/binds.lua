@@ -6,12 +6,8 @@ local specialBinds = {
     X = apps.terminal,
     C = hl.dsp.window.close(),
     R = apps.menu,
-    N = {
-        "hyprlock",
-        "keepassxc --lock",
-        "ssh-add -D"
-    },
-    M = hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"),
+    M = "loginctl lock-session",
+    -- M = hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"),
     P = hl.dsp.window.pseudo({action = "toggle"}),
     V = hl.dsp.window.float({action = "toggle"}),
     F = hl.dsp.window.fullscreen({action = "toggle"}),
@@ -39,6 +35,8 @@ local mouseBinds = {
     ["mouse:273"] = hl.dsp.window.resize()
 }
 
+-- Can find these binds by running "sudo evtest"
+-- https://github.com/xkbcommon/libxkbcommon/blob/master/include/xkbcommon/xkbcommon-keysyms.h
 local nonSpecialBinds = {
     XF86AudioRaiseVolume = "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
     XF86AudioLowerVolume = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
@@ -54,7 +52,7 @@ local nonSpecialBinds = {
     XF86AudioStop = "playerctl stop",
     XF86AudioPrev = "playerctl previous",
     XF86AudioPlay = "playerctl play-pause",
-    XF86AudioPause = "playerctl play-pause",
+    -- XF86AudioPause = "playerctl play-pause", -- No such key on my keyboard
     XF86AudioNext = "playerctl next",
     Print = "sh -c 'GEOM=$(slurp -d) || exit 0; grim -g \"$GEOM\" - | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png | wl-copy'",
     ["ALT + Print"] = "sh -c 'grim - | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png | wl-copy'"

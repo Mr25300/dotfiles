@@ -4,6 +4,6 @@ return {
     menu = "wofi",
     webBrowser = "firefox",
     mailClient = "betterbird",
-    calculator = "kitty",
+    calculator = "qalculate-gtk",
     mediaPlayer = "spotify-launcher"
 }
