@@ -34,10 +34,10 @@ local profiles = {
 
 -- Temporary workaround for identifying device type
 
-for _, monitor in ipairs(hl.get_monitors()) do
-    if monitor.name == "eDP-1" then -- Device has an embedded display
-        return profiles.bastion -- Laptop
-    end
-end
+local ch = io.popen("hostnamectl chassis"):read("*l")
 
-return profiles.sanctum -- Desktop
+if ch == "laptop" then
+    return profiles.bastion
+else
+    return profiles.sanctum
+end
