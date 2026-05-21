@@ -3,13 +3,15 @@ local monitors = require("lua.meta.monitors")
 for name, info in pairs(monitors) do
     hl.monitor({
         output = name,
-        mode = info.res,
-        position = info.pos,
+        mode = info.res or "preferred",
+        position = info.pos or "auto",
         transform = info.transform
     })
 
-    for _, num in ipairs(info.workspaces) do
-        hl.workspace_rule({workspace = tostring(num), monitor = name})
+    if info.workspaces then
+        for _, num in ipairs(info.workspaces) do
+            hl.workspace_rule({workspace = tostring(num), monitor = name})
+        end
     end
 end
 
