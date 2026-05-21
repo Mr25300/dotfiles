@@ -4,7 +4,7 @@ local envVars = {
 
     -- Remove these if something breaks
     GDK_BACKEND = "wayland,x11",
-    QT_QPA_PLAFORM = "wayland",
+    QT_QPA_PLATFORM = "wayland",
 
     QT_QPA_PLATFORMTHEME = "qt6ct",
 }

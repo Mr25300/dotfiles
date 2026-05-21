@@ -73,7 +73,6 @@ pipewire
 pipewire-alsa
 pipewire-jack
 pipewire-pulse
-polkit-kde-agent
 prismlauncher
 proton-vpn-cli
 qalculate-gtk
@@ -94,7 +93,6 @@ stow
 syncthing
 timeshift
 ttf-jetbrains-mono-nerd
-tumbler
 unzip
 vorta
 waybar
