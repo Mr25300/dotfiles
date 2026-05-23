@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+ID_FILE="/tmp/screen_recording_notification_id"
+SAVE_DIR="$RECORDINGS_DIR"
+OUTPUT_FILE="$SAVE_DIR/$(date +%Y-%m-%d-%H%M%S).mp4"
+
+mkdir -p "$SAVE_DIR"
+
+if pgrep -x wf-recorder > /dev/null; then
+    pkill -INT wf-recorder
+
+    if [ -f "$ID_FILE" ]; then
+        NOTIFY_ID=$(cat "$ID_FILE")
+
+        makoctl dismiss -n "$NOTIFY_ID" 2>/dev/null # Handles 
+
+        rm "$ID_FILE"
+    fi
+
+    notify-send "Recording Saved" "Recording saved in $OUTPUT_FILE." -t 5000
+
+    exit 0
+fi
+
+MODE=$1
+
+if [ "$MODE" == "selection" ]; then
+    GEOM=$(slurp)
+elif [ "$MODE" == "monitor" ]; then
+    GEOM=$(slurp -o)
+else
+    exit 1
+fi
+
+if [ -n "$GEOM" ]; then
+    notify-send "Recording Active" "wf-recorder is currently capturing your screen..." -t 0 -p > "$ID_FILE"
+
+    wf-recorder -g "$GEOM" -f "$OUTPUT_FILE" -a pipewire:capture # Fix audio
+else
+    notify-send "Empty Selection" "Cannot record empty selection." -t 2000
+fi

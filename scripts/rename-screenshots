@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Script for removing "Screenshot " prefix from existing Windows 11 screenshots
+# Make this work for Windows 10 as well and run it on sanctum
+
+cd "$HOME/Pictures/Screenshots" || exit 1
+
+for file in "Screenshot "*; do
+    [[ -e "$file" ]] || continue
+
+    new_name="${file#Screenshot }" # Remove prefix
+    new_name="${new_name// /-}" # Replace space with dash
+
+    mv -n "$file" "$new_name"
+done
+
+echo "Renaming complete!"

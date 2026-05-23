@@ -1,19 +1,4 @@
-# PATH CONFIGURATION
-
-setopt extended_glob null_glob
-
-path=(
-    $path
-    $HOME/.local/bin # For user-level applications
-    $SCRIPTS
-)
-
-# Remove duplicate and non-existent directories
-typeset -U path
-path=($^path(N-/))
-
-export PATH
-
+# This is run only inside interactive shells (terminal)
 
 # EDITING MODE
 
@@ -24,12 +9,6 @@ export KEYTIMEOUT=1 # Reduces wait time after escape
 
 
 # HISTORY
-
-ZSH_STATE_DIR="$XDG_STATE_HOME/zsh"
-
-if [[ ! -d "$ZSH_STATE_DIR" ]]; then
-    mkdir -p "$ZSH_STATE_DIR"
-fi
 
 HISTFILE="$ZSH_STATE_DIR/history"
 HISTSIZE=100000

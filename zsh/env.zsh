@@ -1,3 +1,23 @@
+# All the environment variables for zsh
+
+# SCRIPTS AND PATH
+
+setopt extended_glob null_glob # Required for removing non-existent directories below
+
+export SCRIPTS="$DOTFILES/scripts"
+
+path=(
+    $path
+    $HOME/.local/bin # For user-level applications
+    $SCRIPTS
+)
+
+typeset -U path # Clean duplicates
+path=($^path(N-/)) # Remove non-existent directories
+
+export PATH
+
+
 # APPS
 
 export VISUAL=nvim
@@ -9,9 +29,14 @@ export TERMINAL=kitty
 export BROWSER=firefox
 
 
-# SCRIPTS
+# USER DIRS
 
-export SCRIPTS="$DOTFILES/scripts"
+if [[ -f "$XDG_CONFIE_HOME/user-dirs.dirs" ]]; then
+    source "$XDG_CONFIG_HOME/user-dirs.dirs"
+fi
+
+export SCREENSHOTS_DIR="${XDG_PICTURES_DIR:-$HOME/Pictures}/Screenshots"
+export RECORDINGS_DIR="${XDG_VIDEOS_DIR:-$HOME/Videos}/Recordings"
 
 
 # SSH

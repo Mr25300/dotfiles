@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# Maybe write this manually without hyprshot
+
+SAVE_DIR="$RECORDINGS_DIR"
+OUTPUT_FILE="$SAVE_DIR/$(date +%Y-%m-%d-%H%M%S).png"
+
+MODE=$1
+MANUAL=$2
+
+cmd=(hyprshot -o "$SAVE_DIR" -f "$(basename "$OUTPUT_FILE")")
+
+if [ "$MODE" == "selection" ]; then
+    cmd+=(-m region -z)
+else
+    if [ "$MODE" == "window" ]; then
+        cmd+=(-m window)
+    elif [ "$MODE" == "monitor" ]; then
+        cmd+=(-m output)
+    else
+        exit 1
+    fi
+
+    if [ "$MANUAL" == "manual" ]; then
+        cmd+=(-m active)
+    fi
+fi
+
+"${cmd[@]}"

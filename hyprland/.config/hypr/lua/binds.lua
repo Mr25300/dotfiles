@@ -2,7 +2,7 @@ local apps = require("lua.meta.apps")
 
 local mainMod = "SUPER"
 
-local specialBinds = {
+local special_binds = {
     X = apps.terminal,
     C = hl.dsp.window.close(),
     R = apps.menu,
@@ -27,17 +27,17 @@ local specialBinds = {
     S = hl.dsp.workspace.toggle_special("magic"),
     ["SHIFT + S"] = hl.dsp.window.move({workspace = "special:magic"}),
     mouse_down = hl.dsp.focus({workspace = "e+1"}),
-    mouse_up = hl.dsp.focus({workspace = "e-1"}),
+    mouse_up = hl.dsp.focus({workspace = "e-1"})
 }
 
-local mouseBinds = {
+local mouse_binds = {
     ["mouse:272"] = hl.dsp.window.drag(),
     ["mouse:273"] = hl.dsp.window.resize()
 }
 
 -- Can find these binds by running "sudo evtest"
 -- https://github.com/xkbcommon/libxkbcommon/blob/master/include/xkbcommon/xkbcommon-keysyms.h
-local nonSpecialBinds = {
+local binds = {
     XF86AudioRaiseVolume = "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
     XF86AudioLowerVolume = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
     XF86AudioMute = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
@@ -54,8 +54,22 @@ local nonSpecialBinds = {
     XF86AudioPlay = "playerctl play-pause",
     -- XF86AudioPause = "playerctl play-pause", -- No such key on my keyboard
     XF86AudioNext = "playerctl next",
-    Print = "sh -c 'GEOM=$(slurp -d) || exit 0; grim -g \"$GEOM\" - | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png | wl-copy'",
-    ["ALT + Print"] = "sh -c 'grim - | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png | wl-copy'"
+    Print = "zsh -c 'screenshot selection'",
+    ["CTRL + Print"] = "zsh -c 'screenshot window'",
+    ["SHIFT + CTRL + Print"] = "zsh -c 'screenshot window manual'",
+    ["ALT + Print"] = "zsh -c 'screenshot monitor'",
+    ["SHIFT + ALT + Print"] = "zsh -c 'screenshot monitor manual'",
+    ["SUPER + Print"] = "zsh -c 'screen-record selection' > /tmp/record.log 2>&1",
+    ["SUPER + ALT + Print"] = "zsh -c 'screen-record monitor'",
+    ["ALT + C"] = "hyprpicker"
+    -- Print = {
+    --     "sh -c 'GEOM=$(slurp -d) || exit 0; grim -g \"$GEOM\" - | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png | wl-copy'",
+    --     "notify-send 'Screenshot Saved and Copied to Clipboard'"
+    -- },
+    -- ["ALT + Print"] = {
+    --     "sh -c 'grim - | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png | wl-copy'",
+    --     "notify-send 'Screenshot Saved and Copied to Clipboard'"
+    -- }
 }
 
 local function getDispatcher(command)
@@ -97,15 +111,15 @@ hl.device({
     sensitivity = -0.5,
 })
 
-for key, bind in pairs(specialBinds) do
+for key, bind in pairs(special_binds) do
     hl.bind(mainMod .. " + " .. key, getDispatcher(bind))
 end
 
-for key, bind in pairs(mouseBinds) do
+for key, bind in pairs(mouse_binds) do
     hl.bind(mainMod .. " + " .. key, getDispatcher(bind), {mouse = true})
 end
 
-for key, bind in pairs(nonSpecialBinds) do
+for key, bind in pairs(binds) do
     hl.bind(key, getDispatcher(bind))
 end
 
