@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+# Script for removing "Screenshot " prefix from existing Windows 11 screenshots
+# Make this work for Windows 10 as well and run it on sanctum
+
+cd "$SCREENSHOTS_DIR" || exit 1
+
+rename_dir() {
+    local target_dir="$1"
+
+    if ! pushd "$target_dir" > /dev/null; then
+        echo "Error: Could not access directory '$target_dir'" >&2
+
+        return 1
+    fi
+
+    for file in *; do
+        [[ -e "$file" ]] || continue
+
+        new_name="${file#Screenshot }"
+        new_name="${new_name#Recording }"
+
+        if [[ "$new_name" =~ ^([0-9]{4}-[0-9]{2}-[0-9]{2})[[:space:]_]([0-9]{2})-([0-9]{2})-([0-9]{2}) ]]; then
+            date_part="${BASH_REMATCH[1]}"
+            h_part="${BASH_REMATCH[2]}"
+            m_part="${BASH_REMATCH[3]}"
+            s_part="${BASH_REMATCH[4]}"
+            ext="${new_name##*.}"
+            new_name="${date_part}-${h_part}${m_part}${s_part}.${ext}"
+
+        elif [[ "$new_name" =~ ^([0-9]{4}-[0-9]{2}-[0-9]{2})[[:space:]_]([0-9]{6}) ]]; then
+            new_name="${BASH_REMATCH[1]}-${BASH_REMATCH[2]}.${new_name##*.}"
+        else
+            new_name="${new_name// /-}"
+        fi
+
+        if [[ "$file" != "$new_name" ]]; then
+            mv -n "$file" "$new_name"
+        fi
+    done
+
+    popd > /dev/null
+}
+
+rename_dir "$SCREENSHOTS_DIR"
+rename_dir "$RECORDINGS_DIR"
+
+echo "Renaming complete!"

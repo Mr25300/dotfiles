@@ -2,7 +2,7 @@
 
 # Maybe write this manually without hyprshot
 
-SAVE_DIR="$RECORDINGS_DIR"
+SAVE_DIR="$SCREENSHOTS_DIR"
 OUTPUT_FILE="$SAVE_DIR/$(date +%Y-%m-%d-%H%M%S).png"
 
 MODE=$1

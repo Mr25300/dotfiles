@@ -35,7 +35,15 @@ fi
 if [ -n "$GEOM" ]; then
     notify-send "Recording Active" "wf-recorder is currently capturing your screen..." -t 0 -p > "$ID_FILE"
 
-    wf-recorder -g "$GEOM" -f "$OUTPUT_FILE" -a pipewire:capture # Fix audio
+    wf-recorder -g "$GEOM" -f "$OUTPUT_FILE" \
+        -c libx264 -x yuv420p \
+        -a pipewire:capture -C aac # Fix audio
+
+    # TMP_FILE=$(mktemp /tmp/wf-record-XXXXXX.mkv)
+    #
+    # ffmpeg -i "$TMP_FILE" -c copy -movflags +faststart "$OUTPUT_FILE"
+    #
+    # rm "$TMP_FILE"
 else
     notify-send "Empty Selection" "Cannot record empty selection." -t 2000
 fi
