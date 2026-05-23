@@ -2,11 +2,12 @@ local apps = require("lua.meta.apps")
 
 local mainMod = "SUPER"
 
+-- TODO: Handle the different types of binds better
+
 local special_binds = {
     X = apps.terminal,
     C = hl.dsp.window.close(),
     R = apps.menu,
-    M = "loginctl lock-session",
     -- M = hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"),
     P = hl.dsp.window.pseudo({action = "toggle"}),
     V = hl.dsp.window.float({action = "toggle"}),
@@ -28,6 +29,11 @@ local special_binds = {
     ["SHIFT + S"] = hl.dsp.window.move({workspace = "special:magic"}),
     mouse_down = hl.dsp.focus({workspace = "e+1"}),
     mouse_up = hl.dsp.focus({workspace = "e-1"})
+}
+
+-- Can run while screen is locked
+local locked_special_binds = {
+    M = "pgrep hyprlock && systemctl suspend || loginctl lock-session",
 }
 
 local mouse_binds = {
@@ -113,6 +119,10 @@ hl.device({
 
 for key, bind in pairs(special_binds) do
     hl.bind(mainMod .. " + " .. key, getDispatcher(bind))
+end
+
+for key, bind in pairs(locked_special_binds) do
+    hl.bind(mainMod .. " + " .. key, getDispatcher(bind), {locked = true})
 end
 
 for key, bind in pairs(mouse_binds) do

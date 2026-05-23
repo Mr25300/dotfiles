@@ -1,4 +1,4 @@
-local envVars = {
+local env_vars = {
     XCURSOR_SIZE = "24",
     HYPRCURSOR_SIZE = "24",
 
@@ -13,7 +13,7 @@ local envVars = {
 ---@field [integer] string | {[1]: string, [2]: integer} 
 
 ---@type StartupCommands
-local startupCommands = {
+local startup_commands = {
     "systemctl --user start waybar",
     "systemctl --user start mako",
     "systemctl --user start hyprpolkitagent",
@@ -30,12 +30,12 @@ local startupCommands = {
     "playerctld daemon" -- Allows playerctl to prioritize most recently played players
 }
 
-for var, value in pairs(envVars) do
+for var, value in pairs(env_vars) do
     hl.env(var, value)
 end
 
 hl.on("hyprland.start", function()
-    for _, command in ipairs(startupCommands) do
+    for _, command in ipairs(startup_commands) do
         if type(command) == "string" then
             hl.exec_cmd(command)
         else
