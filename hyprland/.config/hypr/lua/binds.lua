@@ -1,5 +1,4 @@
 local apps = require("lua.meta.apps")
-local state = require("lua.meta.state")
 
 local mainMod = "SUPER"
 

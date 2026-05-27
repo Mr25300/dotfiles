@@ -1,6 +1,3 @@
-Top priority:
-- Add way to differentiate between devices (sanctum and bastion)
-
 Must install for neovim:
 - Harpoon
 - Theme/Color
@@ -10,4 +7,4 @@ Must install for neovim:
 
 Miscellaneous todo:
 - Make it so github ssh signing key is added to agent automatically and lasts 10m
-- Make backup-pkgs script run automatically
+- Make backup-pkgs script run automatically and handle devices independently (and handle shared packages)
