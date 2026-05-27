@@ -3,8 +3,9 @@ return {
     lazy = false,
     build = ":TSUpdate",
     opts = {
-        highlight = { enable = true },
         indent = { enable = true },
+        highlight = { enable = true },
+        folds = { enable = true },
         ensure_installed = {
             "lua",
             "bash",
@@ -16,7 +17,10 @@ return {
             "javascript",
             "typescript",
             "markdown",
-            "markdown_inline"
+            "markdown_inline",
+            "latex",
+            "yaml",
+            "json"
         }
     }
 }
