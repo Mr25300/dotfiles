@@ -5,6 +5,7 @@ for name, info in pairs(monitors) do
         output = name,
         mode = info.res or "preferred",
         position = info.pos or "auto",
+        scale = info.scale or 1,
         transform = info.transform
     })
 
@@ -24,6 +25,9 @@ hl.config({
     },
     scrolling = {
         fullscreen_on_one_column = true
+    },
+    xwayland = {
+        force_zero_scaling = true
     }
 })
 

@@ -1,3 +1,4 @@
+require("lua.meta.state").init()
 require("lua.layout")
 require("lua.startup")
 require("lua.decorations")

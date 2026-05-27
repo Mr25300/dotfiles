@@ -1,13 +1,30 @@
+local state = require("lua.meta.state")
+
 local env_vars = {
     XCURSOR_SIZE = "24",
     HYPRCURSOR_SIZE = "24",
 
     -- Remove these if something breaks
     GDK_BACKEND = "wayland,x11",
-    QT_QPA_PLATFORM = "wayland",
+    QT_QPA_PLATFORM = "wayland;xcb",
 
     QT_QPA_PLATFORMTHEME = "qt6ct",
+
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland",
+    ELECTRON_ENABLE_WAYLAND = "1"
 }
+
+local nvidia_env_vars = {
+    LIBVA_DRIVER_NAME = "nvidia",
+    GBM_BACKEND = "nvidia-drm",
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia"
+}
+
+if state.nvidia_gpu then
+    for var, value in pairs(nvidia_env_vars) do
+        env_vars[var] = value
+    end
+end
 
 ---@class StartupCommands
 ---@field [integer] string | {[1]: string, [2]: integer} 

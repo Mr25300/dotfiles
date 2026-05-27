@@ -1,3 +1,6 @@
+Top priority:
+- Add way to differentiate between devices (sanctum and bastion)
+
 Must install for neovim:
 - Harpoon
 - Theme/Color
