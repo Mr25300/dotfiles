@@ -67,7 +67,7 @@ local binds = {
     ["SHIFT + ALT + Print"] = "zsh -c 'screenshot monitor manual'",
     ["SUPER + Print"] = "zsh -c 'screen-record selection' > /tmp/record.log 2>&1",
     ["SUPER + ALT + Print"] = "zsh -c 'screen-record monitor'",
-    ["ALT + C"] = "hyprpicker"
+    ["ALT + C"] = "hyprpicker | wl-copy"
     -- Print = {
     --     "sh -c 'GEOM=$(slurp -d) || exit 0; grim -g \"$GEOM\" - | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png | wl-copy'",
     --     "notify-send 'Screenshot Saved and Copied to Clipboard'"
