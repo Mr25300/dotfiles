@@ -8,6 +8,7 @@ local special_binds = {
     X = apps.terminal,
     C = hl.dsp.window.close(),
     R = apps.menu,
+    B = "hyprpicker | wl-copy",
     -- M = hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"),
     P = hl.dsp.window.pseudo({action = "toggle"}),
     V = hl.dsp.window.float({action = "toggle"}),
@@ -67,7 +68,6 @@ local binds = {
     ["SHIFT + ALT + Print"] = "zsh -c 'screenshot monitor manual'",
     ["SUPER + Print"] = "zsh -c 'screen-record selection' > /tmp/record.log 2>&1",
     ["SUPER + ALT + Print"] = "zsh -c 'screen-record monitor'",
-    ["ALT + C"] = "hyprpicker | wl-copy"
     -- Print = {
     --     "sh -c 'GEOM=$(slurp -d) || exit 0; grim -g \"$GEOM\" - | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png | wl-copy'",
     --     "notify-send 'Screenshot Saved and Copied to Clipboard'"

@@ -44,6 +44,4 @@ if [ -n "$GEOM" ]; then
     # ffmpeg -i "$TMP_FILE" -c copy -movflags +faststart "$OUTPUT_FILE"
     #
     # rm "$TMP_FILE"
-else
-    notify-send "Empty Selection" "Cannot record empty selection." -t 2000
 fi

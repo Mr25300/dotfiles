@@ -48,6 +48,7 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # XDG COMPLIANCE
 
+# Some of these need to be added with systemctl set-environment to work
 export PYTHON_HISTORY="$XDG_STATE_HOME/python_history" # python
 export GNUPGHOME="$XDG_DATA_HOME/gnupg" # gnupg
 export DOTNET_CLI_HOME="$XDG_DATA_HOME/dotnet" # donet-sdk
@@ -55,3 +56,4 @@ export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv" # CUDA
 # "$XDG_CONFIG_HOME/gtk-2.0/gtkrc.mine" for manual
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc" # GTK 2 (may not work)
 export PULSE_COOKIE="$XDG_CONFIG_HOME/pulse/cookie" # pipewire-pulse
+export OLLAMA_MODELS="$XDG_DATA_HOME/ollama/models" # ollama models
