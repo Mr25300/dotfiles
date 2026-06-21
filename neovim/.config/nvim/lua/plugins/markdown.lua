@@ -1,18 +1,10 @@
 return {
-    -- {
-    --     "iamcco/markdown-preview.nvim",
-    --     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    --     build = "cd app && npm install",
-    --     init = function()
-    --         vim.g.mkdp_filetypes = { "markdown" }
-    --     end,
-    --     ft = { "markdown" }
-    -- },
     {
-        'brianhuster/live-preview.nvim', -- TODO: 
+        "brianhuster/live-preview.nvim",
         dependencies = {
-            'nvim-telescope/telescope.nvim'
-        }
+            "nvim-telescope/telescope.nvim"
+        },
+        ft = { "markdown", "html", "css", "javascript", "asciidoc", "svg" } -- TODO: Test each
     },
     {
         "MeanderingProgrammer/render-markdown.nvim",
@@ -20,10 +12,11 @@ return {
             "nvim-treesitter/nvim-treesitter",
             "nvim-mini/mini.icons"
         },
+        ft = { "markdown", "quarto" },
 
         ---@module 'render-markdown'
         ---@type render.md.UserConfig
-        opts = {
+        opts = { -- TODO: Go through all options
             latex = { enabled = false },
             completions = {
                 lsp = { enabled = true }

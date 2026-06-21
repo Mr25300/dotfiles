@@ -18,20 +18,26 @@ return {
         --     })
         -- end
     },
+    -- {
+    --     "nvim-mini/mini.surround",
+    --     event = { "BufReadPost", "BufNewFile" },
+    --     version = false,
+    --     opts = {
+    --         mappings = {
+    --             add = "sa",
+    --             delete = "sd",
+    --             find = "sf", -- To the right
+    --             find_left = "sF",
+    --             highlight = "sh",
+    --             replace = "sr"
+    --         },
+    --
+    --         n_lines = 50
+    --     }
+    -- }
     {
-        "nvim-mini/mini.surround",
-        event = "VeryLazy",
-        version = false,
-        opts = {
-            mappings = {
-                add = "sa",
-                delete = "sd",
-                find = "sf",
-                find_left = "sF",
-                highlight = "sh",
-                replace = "sr",
-                update_n_lines = "sn"
-            }
-        }
+        "kylechui/nvim-surround",
+        version = "^4.0.0",
+        keys = { "ys", "ds", "cs" } -- Lazy-load on these key mappings
     }
 }
