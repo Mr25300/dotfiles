@@ -1,6 +1,7 @@
 betterbird-bin
 calibre-bin
+paru
+paru-debug
 tutanota-desktop-bin
-yay
-yay-debug
+yt-dlp-nightly-bin
 zsh-theme-powerlevel10k

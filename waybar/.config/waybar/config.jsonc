@@ -1,4 +1,3 @@
-// -*- mode: jsonc -*-
 {
     "layer": "top",
     "position": "top",
@@ -11,7 +10,6 @@
         "custom/playerctl"
     ],
     "modules-right": [
-        // "idle_inhibitor",
         "wireplumber",
         "wireplumber#source",
         "custom/syncthing",
@@ -25,20 +23,21 @@
         "battery#bat2",
         "clock",
         "tray",
+        // "idle_inhibitor",
         "custom/power"
     ],
     "custom/playerctl": {
-        "format": "{text} {icon}",
+        "format": "{icon} {text}",
+        "format-icons": {
+            "spotify": "",
+            "youtube": "",
+            "unknown": "󰲸"
+        },
         "return-type": "json",
-        "max-length": 40,
-        "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{title}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+        "exec": "zsh -c '$DOTFILES/waybar/.config/waybar/scripts/playerctl'",
         "on-click": "playerctl play-pause",
         "on-scroll-up": "playerctl next",
-        "on-scroll-down": "playerctl previous",
-        "format-icons": {
-            "Playing": "",
-            "Paused": ""
-        }
+        "on-scroll-down": "playerctl previous"
     },
     "wireplumber": {
         "node-type": "Audio/Sink",

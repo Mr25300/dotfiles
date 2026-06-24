@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+TEMPLATE="{{title}};{{artist}};{{album}};{{playerName}};{{xesam:url}};{{status}};{{position}};{{mpris:length}}"
+
+format_time() {
+    local microsecs="$1"
+    local secs=$(( microsecs / 1000000 ))
+    local mins=$(( secs / 60 ))
+    local hours=$(( mins / 60 ))
+    secs=$(( secs % 60 ))
+    mins=$(( mins % 60 ))
+
+    if [ "$hours" -eq 0 ]; then
+        printf "%d:%02d" "$mins" "$secs"
+    else
+        printf "%d:%02d:%02d" "$hours" "$mins" "$secs"
+    fi
+}
+
+playerctl metadata --follow --format "$TEMPLATE" 2>/dev/null |
+    while IFS=";" read -r title artist album playerName url status position length
+do
+    player="${playerName:-unknown}"
+    status="${status:-Stopped}"
+
+    if [[ "$url" =~ "youtube" || "$url" =~ "youtu.be" ]]; then
+        player="youtube"
+    fi
+
+    if [ -z "$title" ] || [ "$status" = "Stopped" ]; then
+        text="Stopped"
+    else
+        text="${title}${artist:+" - $artist"}"
+    fi
+
+    if [ "$status" = "Playing" ]; then
+        text="$text "
+    else
+        text="$text "
+    fi
+
+    tooltip_parts=()
+
+    if [ -n "$position" ] && [ -n "$length" ]; then
+        tooltip_parts+=("$(format_time "$position")/$(format_time "$length")")
+    fi
+
+    if [ -n "$album" ]; then
+        tooltip_parts+=("$album 󰀥")
+    fi
+
+    tooltip=$(IFS=";"; echo "${tooltip_parts[*]}") # IFS can only be one character
+    tooltip="${tooltip//;/\\n}"
+
+    echo '{"text": "'$text'", "class": "'$player'", "alt": "'$player'", "tooltip": "'$tooltip'"}'
+done
