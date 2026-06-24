@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+if ! pgrep syncthing > /dev/null; then
+    exit 1
+fi
+
+print_json() {
+    local status="$1"
+    local progress="$2"
+
+    echo '{"text": "'$progress'", "class": "'$status'", "alt": "'$status'"}'
+}
+
+ACTIVE_DEVICES=$(syncthing cli show connections |
+    jq -r ".connections | to_entries[] | select(.value.paused == false and .value.connected == true) | .key")
+
+if [ -z "$ACTIVE_DEVICES" ]; then
+    print_json "paused" 0
+
+    exit 0
+fi
+
+API_KEY=$(syncthing cli config gui apikey get)
+URL=http://localhost:8384
+
+get_completion() {
+    local device_id="$1"
+    local req_url="$URL/rest/db/completion${device_id:+"?device=$device_id"}"
+
+    local completion=$(curl -s -X GET --header="X-API-Key: $API_KEY" "$req_url" |
+        jq -r ".completion")
+    completion=${completion:-0}
+    completion=$(printf "%.0f" "$completion")
+
+    echo "$completion"
+}
+
+SELF_COMPLETION=$(get_completion)
+
+if [ "$SELF_COMPLETION" -ne 100 ]; then
+    print_json "downloading" "$SELF_COMPLETION"
+
+    exit 0
+fi
+
+LOWEST_COMPLETION=100
+
+for DEVICE_ID in $ACTIVE_DEVICES; do
+    DEVICE_COMPLETION=$(get_completion "$DEVICE_ID")
+
+    if [ "$DEVICE_COMPLETION" -lt "$LOWEST_COMPLETION" ]; then
+        LOWEST_COMPLETION=$DEVICE_COMPLETION
+    fi
+done
+
+if [ "$LOWEST_COMPLETION" -ne 100 ]; then
+    print_json "uploading" "$LOWEST_COMPLETION"
+else
+    print_json "synced" 100
+fi

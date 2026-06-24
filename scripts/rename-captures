@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-# Script for removing "Screenshot " prefix from existing Windows 11 screenshots
-# Make this work for Windows 10 as well and run it on sanctum
-
-cd "$SCREENSHOTS_DIR" || exit 1
-
 rename_dir() {
     local target_dir="$1"
 

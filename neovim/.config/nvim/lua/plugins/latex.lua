@@ -2,14 +2,12 @@ return {
     "lervag/vimtex",
     lazy = false,
     init = function()
-        vim.g.vimtext_view_method = "zathura"
-        -- vim.g.vimtex_view_forward_search_on_start = false
-        -- vim.g.vimtex_compiler_latexmk = {
-        --     aux_dir = "/home/oscar/.texfiles/",
-        --     out_dir = "/home/oscar/.texfiles/",
-        -- }
+        vim.g.vimtex_view_method = "zathura_simple"
         vim.g.vimtex_compiler_latexmk = {
-            out_dir = ".build"
+            aux_dir = "build",
+            out_dir = "build"
         }
     end
+    -- TODO: Add custom surroundings as seen here:
+    -- https://www.lorenzobettini.it/2026/04/neovim-and-latex-with-lazyvim-part-3-custom-commands/
 }

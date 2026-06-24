@@ -20,12 +20,28 @@ return {
                 "bashls",
                 "clangd",
                 "pyright",
-                "markdown_oxide"
+                "markdown_oxide",
+                "texlab" -- Make sure this is working
             }
         }
 
         vim.lsp.config("bashls", {
             filetypes = { "sh", "bash", "zsh" }
+        })
+
+        vim.lsp.config("texlab", {
+            settings = {
+                texlab = {
+                    build = {
+                        executable = "",
+                        onSave = false
+                    },
+                    forwardSearch = {
+                        executable = "",
+                        args = {}
+                    }
+                }
+            }
         })
 
         vim.api.nvim_create_autocmd("LspAttach", {
