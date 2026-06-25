@@ -50,6 +50,8 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # Some of these need to be added with systemctl set-environment to work
 export PYTHON_HISTORY="$XDG_STATE_HOME/python_history" # python
+export CARGO_HOME="$XDG_DATA_HOME/cargo" # cargo
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME/java"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg" # gnupg
 export DOTNET_CLI_HOME="$XDG_DATA_HOME/dotnet" # donet-sdk
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv" # CUDA
