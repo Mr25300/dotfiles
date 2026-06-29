@@ -3,5 +3,6 @@ calibre-bin
 paru
 paru-debug
 tutanota-desktop-bin
+woeusb-ng
 yt-dlp-nightly-bin
 zsh-theme-powerlevel10k
