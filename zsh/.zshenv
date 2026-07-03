@@ -10,8 +10,7 @@ export XDG_RUNTIME_DIR="/run/user/$UID"
 
 # dotfiles and zsh
 
-export DOTFILES="$HOME/dotfiles"
-export ZDOTDIR="$DOTFILES/zsh"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export ZSH_STATE_DIR="$XDG_STATE_HOME/zsh"
 
 if [[ -f "$ZDOTDIR/env.zsh" ]]; then

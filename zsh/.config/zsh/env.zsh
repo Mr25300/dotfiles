@@ -4,12 +4,13 @@
 
 setopt extended_glob null_glob # Required for removing non-existent directories below
 
-export SCRIPTS="$DOTFILES/scripts"
+export DOTFILES="$HOME/dotfiles"
+export BIN="$DOTFILES/bin"
 
 path=(
     $path
     $HOME/.local/bin # For user-level applications
-    $SCRIPTS
+    $BIN
 )
 
 typeset -U path # Clean duplicates

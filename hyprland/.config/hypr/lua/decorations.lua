@@ -45,6 +45,11 @@ hl.config({
     animations = {
         enabled = true,
     },
+
+    misc = {
+        force_default_wallpaper = 0,
+        disable_hyprland_logo = false
+    }
 })
 
 -- Default curves and animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
@@ -90,11 +95,4 @@ hl.window_rule({
     match = { float = false, workspace = "f[1]" },
     border_size = 0,
     rounding    = 0,
-})
-
-hl.config({
-    misc = {
-        force_default_wallpaper = 0,
-        disable_hyprland_logo = false
-    }
 })

@@ -33,6 +33,7 @@
             "youtube": "",
             "unknown": "󰲸"
         },
+        "max-length": 30,
         "return-type": "json",
         "exec": "zsh -c '$DOTFILES/waybar/.config/waybar/scripts/playerctl'",
         "on-click": "playerctl play-pause",

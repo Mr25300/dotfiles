@@ -23,6 +23,10 @@ local special_binds = {
     ["SHIFT + L"] = hl.dsp.window.move({direction = "r"}),
     ["SHIFT + K"] = hl.dsp.window.move({direction = "u"}),
     ["SHIFT + J"] = hl.dsp.window.move({direction = "d"}),
+    ["SHIFT + CTRL + H"] = hl.dsp.workspace.move({monitor = "l"}),
+    ["SHIFT + CTRL + L"] = hl.dsp.workspace.move({monitor = "r"}),
+    ["SHIFT + CTRL + K"] = hl.dsp.workspace.move({monitor = "u"}),
+    ["SHIFT + CTRL + J"] = hl.dsp.workspace.move({monitor = "d"}),
     G = hl.dsp.group.toggle(),
     TAB = hl.dsp.group.next(),
     ["SHIFT + TAB"] = hl.dsp.group.prev(),
@@ -61,13 +65,13 @@ local binds = {
     XF86AudioPlay = "playerctl play-pause",
     -- XF86AudioPause = "playerctl play-pause", -- No such key on my keyboard
     XF86AudioNext = "playerctl next",
-    Print = "zsh -c 'screenshot selection'",
-    ["CTRL + Print"] = "zsh -c 'screenshot window'",
-    ["SHIFT + CTRL + Print"] = "zsh -c 'screenshot window manual'",
-    ["ALT + Print"] = "zsh -c 'screenshot monitor'",
+    Print = "~/.config/hypr/scripts/screenshot selection",
+    ["CTRL + Print"] = "~/.config/hypr/scripts/screenshot window",
+    ["SHIFT + CTRL + Print"] = "~/.config/hypr/scripts/screenshot window manual",
+    ["ALT + Print"] = "~/.config/hypr/scripts/screenshot monitor",
     ["SHIFT + ALT + Print"] = "zsh -c 'screenshot monitor manual'",
-    ["SUPER + Print"] = "zsh -c 'screen-record selection' > /tmp/record.log 2>&1",
-    ["SUPER + ALT + Print"] = "zsh -c 'screen-record monitor'",
+    ["SUPER + Print"] = "~/.config/hypr/scripts/screen-record selection",
+    ["SUPER + ALT + Print"] = "~/.config/hypr/scripts/screen-record monitor",
     -- Print = {
     --     "sh -c 'GEOM=$(slurp -d) || exit 0; grim -g \"$GEOM\" - | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png | wl-copy'",
     --     "notify-send 'Screenshot Saved and Copied to Clipboard'"
@@ -103,6 +107,10 @@ hl.config({
         touchpad = {
             natural_scroll = false,
         }
+    },
+
+    misc = {
+        focus_on_activate = true
     }
 })
 
