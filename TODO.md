@@ -12,3 +12,4 @@
 # Miscellaneous:
 - Make it so github ssh signing key is added to agent automatically and lasts 10m
 - Make backup-pkgs script run automatically and handle devices independently (and handle shared packages)
+- Create setup shell script which stows dotfiles and create separate one for homelab
