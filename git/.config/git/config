@@ -1,21 +1,21 @@
 [user]
-	name = Sebastian Cooper-Giannotta
-	email = 109829617+Mr25300@users.noreply.github.com
-	signingkey = ~/.ssh/id_ed25519_github_sign.pub
+    name = Sebastian Cooper-Giannotta
+    email = 109829617+Mr25300@users.noreply.github.com
+    signingkey = ~/.ssh/id_ed25519_github_sign.pub
 
 [core]
-	editor = nvim
-	autocrlf = input
-	; excludesfile = ~/.gitignore_global
+    editor = nvim
+    autocrlf = input
+    ; excludesfile = ~/.gitignore_global
 
 [init]
-	defaultBranch = main
+    defaultBranch = main
 
 [gpg]
-	format = ssh
+    format = ssh
 
 [gpg "ssh"]
-	allowedSignersFile = ~/.ssh/allowed_signers
+    allowedSignersFile = ~/.ssh/allowed_signers
 
 [commit]
-	gpgsign = true
+    gpgsign = true
