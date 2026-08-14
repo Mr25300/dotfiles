@@ -20,6 +20,9 @@ return {
                 "bashls",
                 "clangd",
                 "pyright",
+                "ts_ls",
+                "html",
+                "cssls",
                 "markdown_oxide",
                 "texlab" -- Make sure this is working
             }
