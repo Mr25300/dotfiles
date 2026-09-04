@@ -65,8 +65,9 @@ source ~/.local/share/znap/znap.zsh
 
 # Autocomplete Style
 
+zstyle ':autocomplete:*' widget-style menu-select
 zstyle ':autocomplete:*' min-input 1
-zstyle ':autocomplete:*' delay 0
+zstyle ':autocomplete:*' delay 0.1
 zstyle ':autocomplete:*' add-semicolon no
 zstyle ':completion:*' list-prompt ''
 zstyle ':completion:*' select-prompt ''
@@ -77,6 +78,6 @@ znap source romkatv/powerlevel10k
 znap source marlonrichert/zsh-autocomplete
 znap source zsh-users/zsh-syntax-highlighting
 
-# Load Theme Configuration
+# Theme Configuration
 
 source "$ZDOTDIR/p10k.zsh" # Run 'p10k configure' to change
