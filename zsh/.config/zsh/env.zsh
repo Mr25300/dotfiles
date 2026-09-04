@@ -24,8 +24,11 @@ export PATH
 export VISUAL=nvim
 export EDITOR=nvim
 
-export TERM=kitty
-export TERMINAL=kitty
+if command -v kitty >/dev/null 2>&1; then
+    export TERMINAL=kitty
+elif command -v konsole >/dev/null 2>&1; then
+    export TERMINAL=konsole
+fi
 
 export BROWSER=firefox
 

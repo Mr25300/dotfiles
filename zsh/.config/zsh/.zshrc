@@ -1,5 +1,12 @@
 # This is run only inside interactive shells (terminal)
 
+# LOAD P10K INSTANT PROMPT
+
+if [[ -r "$XDG_CACHE_HOME/p10k-instant-prompt-$USER.zsh" ]]; then
+    source "$XDG_CACHE_HOME/p10k-instant-prompt-$USER.zsh" # To make instant prompt work
+fi
+
+
 # EDITING MODE
 
 set -o vi
@@ -38,28 +45,38 @@ alias grep='grep --color=auto'
 
 # Fuzzyfinding
 
-source <(fzf --zsh)
 # History Search: Ctrl + R
 # File Search: Ctrl + T
 # Directory Jump: Alt + C
 
-# Theme
+if command -v fzf >/dev/null 2>&1; then
+    source <(fzf --zsh)
+else
+    echo "fzf not installed"
+fi
 
-source "$XDG_CACHE_HOME/p10k-instant-prompt-$USER.zsh" # To make instant prompt work
+# Plugins
 
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-source "$ZDOTDIR/p10k.zsh" # Run 'p10k configure' to change
+if [[ ! -r ~/.local/share/znap/znap.zsh ]]; then
+    git clone --depth 1 -- https://github.com/marlonrichert/zsh-snap.git ~/.local/share/znap
+fi
 
-# Autocomplete
+source ~/.local/share/znap/znap.zsh
 
-PLUGINS=/usr/share/zsh/plugins
+# Autocomplete Style
 
+zstyle ':autocomplete:*' min-input 1
+zstyle ':autocomplete:*' delay 0
 zstyle ':autocomplete:*' add-semicolon no
 zstyle ':completion:*' list-prompt ''
 zstyle ':completion:*' select-prompt ''
 
-source "$PLUGINS/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
+# Load Plugins
 
-# Syntax Highlighting
+znap source romkatv/powerlevel10k
+znap source marlonrichert/zsh-autocomplete
+znap source zsh-users/zsh-syntax-highlighting
 
-source "$PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# Load Theme Configuration
+
+source "$ZDOTDIR/p10k.zsh" # Run 'p10k configure' to change
