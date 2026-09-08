@@ -2,7 +2,15 @@ return {
     "lervag/vimtex",
     lazy = false,
     init = function()
-        vim.g.vimtex_view_method = "zathura_simple"
+        local hostname = vim.loop.os_gethostname()
+
+        if hostname == "sanctum" then
+            vim.g.vimtex_view_method = "zathura_simple"
+        else
+            vim.g.vimtex_view_general_viewer = "okular"
+            vim.g.vimtex_view_general_options = "--unique file:@pdf\\#src:@line@tex"
+        end
+
         vim.g.vimtex_compiler_latexmk = {
             aux_dir = "build",
             out_dir = "build"
