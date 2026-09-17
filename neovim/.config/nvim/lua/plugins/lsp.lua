@@ -21,6 +21,7 @@ return {
                 "clangd",
                 "pyright",
                 "ts_ls",
+                "jdtls",
                 "html",
                 "cssls",
                 "markdown_oxide",
