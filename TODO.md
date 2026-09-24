@@ -1,8 +1,9 @@
 # Neovim:
+- Add ability to travel to headers in md files
 - Fix syntax highlighting and autocomplete not working after creating new files (i.e. cpp, lua)
 - Go through LSP and all other plugins' docs that haven't been read through yet
 - Ensure Lazy events are appropriate for every plugin
-- Learn all binds and set it up so they are visible
+- Learn all binds and set it up so they are visible (organize all binds in one file if possible)
 - Install:
     - Harpoon
     - Theme/color (switcher)
