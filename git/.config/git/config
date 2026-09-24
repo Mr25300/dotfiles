@@ -5,8 +5,25 @@
 
 [core]
     editor = nvim
+    pager = nvim -R -
     autocrlf = input
     ; excludesfile = ~/.gitignore_global
+
+[color]
+    pager = no
+
+[diff]
+    tool = nvimdiff
+
+[merge]
+    tool = nvimdiff
+
+[difftool "nvimdiff"]
+    cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
+
+[mergetool "nvimdiff"]
+    cmd = nvim -d \"$LOCAL\" \"$BASE\" \"$REMOTE\" -c \"wincmd w\" -c \"wincmd J\"
+    trustExitCode = true
 
 [init]
     defaultBranch = main
