@@ -12,6 +12,7 @@ return {
             "zsh",
             "c",
             "cpp",
+            "java",
             "python",
             "html",
             "javascript",

@@ -25,7 +25,8 @@ return {
                 "html",
                 "cssls",
                 "markdown_oxide",
-                "texlab" -- Make sure this is working
+                "texlab", -- Make sure this is working
+                "docker_language_server"
             }
         }
 
