@@ -29,7 +29,7 @@ vim.keymap.set("n", "<A-T>", "<cmd>tabclose<CR>", { desc = "Tab: Close current" 
 vim.keymap.set("n", "<A-p>", "<cmd>tabprevious<CR>", { desc = "Tab: Move to previous" })
 vim.keymap.set("n", "<A-n>", "<cmd>tabnext<CR>", { desc = "Tab: Move to next" })
 
-vim.keymap.set("n", "<leader>o", "gx", { desc = "Open: File" })
+vim.keymap.set("n", "<leader>o", "gx", { desc = "Open: File under cursor", remap = true })
 vim.keymap.set("n", "<A-f>", "<C-w>f", { desc = "Open: In horizontal split" })
 vim.keymap.set("n", "<A-F>", "<cmd>vsplit <cfile><CR>", { desc = "Open: In vertical split" })
 vim.keymap.set("n", "<A-gf>", "<C-w>gf", { desc = "Open: In new tab" })
