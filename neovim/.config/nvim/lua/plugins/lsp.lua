@@ -24,9 +24,12 @@ return {
                 "jdtls",
                 "html",
                 "cssls",
+                "docker_language_server", -- Get this to work
                 "markdown_oxide",
+                "yamlls",
+                "jsonls",
                 "texlab", -- Make sure this is working
-                "docker_language_server" -- Get this to work
+                "r_language_server"
             }
         }
 

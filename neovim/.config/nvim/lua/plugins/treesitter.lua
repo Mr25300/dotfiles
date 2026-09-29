@@ -17,11 +17,13 @@ return {
             "html",
             "javascript",
             "typescript",
+            "dockerfile",
             "markdown",
             "markdown_inline",
-            "latex",
             "yaml",
-            "json"
+            "json",
+            "latex",
+            "r"
         }
     }
 }
