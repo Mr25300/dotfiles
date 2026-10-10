@@ -41,6 +41,13 @@ alias ll='ls -lathr'
 alias grep='grep --color=auto'
 
 
+# FUNCTIONS
+
+chpwd() {
+    ls
+}
+
+
 # SOURCING
 
 # Fuzzyfinding
