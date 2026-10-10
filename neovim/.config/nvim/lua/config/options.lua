@@ -31,6 +31,23 @@ vim.opt.softtabstop = 4
 vim.opt.expandtab = true
 vim.opt.smarttab = true
 
+vim.api.nvim_create_user_command("TabSize", function(opts)
+    local size = tonumber(opts.args)
+
+    if size and size > 0 then
+        vim.opt_local.tabstop = size
+        vim.opt_local.shiftwidth = size
+        vim.opt_local.softtabstop = size
+
+        vim.notify("Set buffer indentation to " .. size .. " spaces", vim.log.levels.INFO)
+    else
+        vim.notify("Invalid tab size provided", vim.log.levels.ERROR)
+    end
+end, {
+    nargs = 1,
+    desc = "Set buffer tab dynamically"
+})
+
 vim.opt.wrap = false
 vim.opt.breakindent = true
 vim.opt.smartindent = true
