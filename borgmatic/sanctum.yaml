@@ -1,4 +1,8 @@
-<<: !include shared/common.yaml
+<<: !include [shared/defaults.yaml, shared/local.yaml]
+
+constants:
+  host: sanctum
+  scope: sebastian
 
 source_directories:
   - /home/sebastian/.config

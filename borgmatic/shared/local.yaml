@@ -1,0 +1,3 @@
+repositories:
+  - path: /data/backups/borg/{host}-{scope}
+    label: local

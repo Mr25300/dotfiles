@@ -1,0 +1,24 @@
+<<: !include shared/defaults.yaml
+
+constants:
+  host: bastion
+
+source_directories:
+  - /home/sebastian/.config
+  - /home/sebastian/.ssh
+  - /home/sebastian/code
+  - /home/sebastian/Desktop
+  - /home/sebastian/Documents
+  - /home/sebastian/dotfiles
+  - /home/sebastian/Downloads
+  - /home/sebastian/Music
+  - /home/sebastian/Pictures
+  - /home/sebastian/Public
+  - /home/sebastian/Templates
+  - "/home/sebastian/U of T"
+  - /home/sebastian/Videos
+
+exclude_patterns:
+  - "sh:**/.venv"
+  - "sh:**/node_modules"
+  - "sh:/home/sebastian/code/**/build"

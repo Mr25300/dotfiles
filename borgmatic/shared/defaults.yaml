@@ -1,0 +1,36 @@
+compression: auto,zstd
+encryption_passphrase: ${BORG_PASSPHRASE}
+
+archive_name_format: "{host}-{scope}-{now:%Y-%m-%d-%H%M%S}"
+
+exclude_caches: true
+
+repositories:
+  - path: ssh://sagittarius-borg/data/backups/borg/{host}-{scope}
+    label: sagittarius
+
+keep_daily: 4
+keep_weekly: 3
+keep_monthly: 2
+
+checks:
+  - name: repository
+    frequency: 1 week
+  - name: data
+    frequency: 1 month
+
+check_last: 3
+
+commands:
+  - before: action
+    when: [create]
+    run:
+      - notify-send "Borgmatic" "Started backup for {host}-{scope}"
+  - after: action
+    when: [create]
+    run:
+      - notify-send "Borgmatic" "Finished backup for {host}-{scope}"
+  - after: error
+    when: [create, prune, compact, check]
+    run:
+      - notify-send "Borgmatic" "An error occured with {host}-{scope}" --urgency=critical
