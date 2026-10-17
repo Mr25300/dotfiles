@@ -1,0 +1,55 @@
+compression: auto,zstd
+encryption_passphrase: ${BORG_SANCTUM_PASSPHRASE}
+
+archive_name_format: "sanctum-sebastian-{now:%Y-%m-%d-%H%M%S}"
+
+source_directories:
+  - /home/sebastian/.config
+  - /home/sebastian/.ssh
+  - /home/sebastian/Archive
+  - /home/sebastian/code
+  - /home/sebastian/Creations
+  - /home/sebastian/Desktop
+  - /home/sebastian/Documents
+  - /home/sebastian/dotfiles
+  - /home/sebastian/Downloads
+  - /home/sebastian/Music
+  - /home/sebastian/Pictures
+  - /home/sebastian/Public
+  - /home/sebastian/Templates
+  - /home/sebastian/Videos
+
+exclude_patterns:
+  - "sh:**/.venv"
+  - "sh:**/node_modules"
+  - "sh:/home/sebastian/code/**/build"
+
+exclude_caches: true
+
+repositories:
+  - path: sagittarius-borg:/data/backups/borg/sanctum
+    label: sagittarius
+  - path: /data/backups/borg-sanctum
+    label: local
+
+commands:
+  - before: action
+    when: [create]
+    run:
+      - notify-send "Borgmatic" "Started backup"
+  - after: action
+    when: [create]
+    run:
+      - notify-send "Borgmatic" "Finished backup"
+
+keep_daily: 5
+keep_weekly: 3
+keep_monthly: 2
+
+checks:
+  - name: repository
+    frequency: 1 week
+  - name: data
+    frequency: 1 month
+
+check_last: 3
