@@ -4,6 +4,7 @@
 
 constants:
   host: bastion
+  scope: sebastian
 
 source_directories:
   - /home/sebastian/.config
