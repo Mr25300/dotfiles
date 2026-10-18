@@ -1,3 +1,6 @@
+# Borgmatic:
+- Add systemd service and timer file as part of configuration (and setup script)
+
 # Neovim:
 - Add ability to travel to headers in md files
 - Fix syntax highlighting and autocomplete not working after creating new files (i.e. cpp, lua)
@@ -11,6 +14,7 @@
     - Comment/TODO highlighter
 
 # Miscellaneous:
+- Make script for generating SSH keys (i.e. for borg on server)
 - Make it so github ssh signing key is added to agent automatically and lasts 10m
 - Make backup-pkgs script run automatically and handle devices independently (and handle shared packages)
 - Create setup shell script which stows dotfiles and create separate one for homelab
