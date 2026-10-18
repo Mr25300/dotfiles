@@ -25,12 +25,36 @@ commands:
   - before: action
     when: [create]
     run:
-      - notify-send "Borgmatic" "Started backup for {host}-{scope}"
+      - 'notify-send "Borgmatic" "Started backup: {repository_label}"'
   - after: action
     when: [create]
     run:
-      - notify-send "Borgmatic" "Finished backup for {host}-{scope}"
-  - after: error
-    when: [create, prune, compact, check]
+      - 'notify-send "Borgmatic" "Finished backup: {repository_label}"'
+  - before: action
+    when: [prune]
     run:
-      - notify-send "Borgmatic" "An error occured with {host}-{scope}" --urgency=critical
+      - 'notify-send "Borgmatic" "Started prune: {repository_label}"'
+  - after: action
+    when: [prune]
+    run:
+      - 'notify-send "Borgmatic" "Finished prune: {repository_label}"'
+  - before: action
+    when: [check]
+    run:
+      - 'notify-send "Borgmatic" "Started check: {repository_label}"'
+  - after: action
+    when: [check]
+    run:
+      - 'notify-send "Borgmatic" "Finished check: {repository_label}"'
+  - before: action
+    when: [compact]
+    run:
+      - 'notify-send "Borgmatic" "Started compact: {repository_label}"'
+  - after: action
+    when: [compact]
+    run:
+      - 'notify-send "Borgmatic" "Finished compact: {repository_label}"'
+  - after: error
+    when: [create, prune, check, compact]
+    run:
+      - 'notify-send "Borgmatic" "An error occurred: {error}" --urgency=critical'
