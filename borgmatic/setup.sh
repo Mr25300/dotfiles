@@ -2,13 +2,34 @@
 
 set -euo pipefail
 
-CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}"
-SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+echo "Setting up environment variables"
 
-echo "Linking borgmatic configuration files"
+CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}"
 
 TARGET_DIR="$CONFIG_DIR/borgmatic.d"
 mkdir -p "$TARGET_DIR"
+
+ENV_FILE="$TARGET_DIR/.env"
+
+if [ -z "${BORG_PASSPHRASE:-}" ]; then
+    if [ -f "$ENV_FILE" ]; then
+        echo "Using existing BORG_PASSPHRASE from $ENV_FILE"
+    else
+        read -rsp "Enter your Borg passphrase: " BORG_PASSPHRASE
+        echo
+    fi
+fi
+
+if [ -n "${BORG_PASSPHRASE:-}" ]; then
+    echo "BORG_PASSPHRASE=${BORG_PASSPHRASE}" > "$ENV_FILE"
+    chmod 600 "$ENV_FILE"
+fi
+
+echo "Finished setting up environment variables"
+
+echo "Linking borgmatic configuration files"
+
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 
 find "$TARGET_DIR" -type l -delete
 
@@ -31,34 +52,32 @@ done
 
 echo "Finished linking Borgmatic configuration files"
 
-ENV_FILE="$TARGET_DIR/.env"
+# SYSTEMD_OVERRIDE_DIR="$CONFIG_DIR/systemd/user/borgmatic-user.service.d"
+# mkdir -p "$SYSTEMD_OVERRIDE_DIR"
 
-SYSTEMD_OVERRIDE_DIR="$CONFIG_DIR/systemd/user/borgmatic-user.service.d"
-mkdir -p "$SYSTEMD_OVERRIDE_DIR"
+# cat << EOF > "$SYSTEMD_OVERRIDE_DIR/override.conf"
+# [Service]
+# EnvironmentFile=$ENV_FILE
+# EOF
 
-echo "Adding BORG_PASSPHRASE to systemd"
+echo "Linking systemd files"
 
-if [ -z "${BORG_PASSPHRASE:-}" ]; then
-    if [ -f "$ENV_FILE" ]; then
-        echo "Using existing BORG_PASSPHRASE from $ENV_FILE"
-    else
-        read -rsp "Enter your Borg passphrase: " BORG_PASSPHRASE
-        echo
+SYSTEMD_DIR="$CONFIG_DIR/systemd/user"
+mkdir -p "$SYSTEMD_DIR"
+
+for file in "$SCRIPT_DIR/systemd"/*; do
+    if [ -f "$file" ]; then
+        filename=$(basename "$file")
+        ln -sf "$file" "$SYSTEMD_DIR/$filename"
+        echo "Linked $filename"
     fi
-fi
+done
 
-if [ -n "${BORG_PASSPHRASE:-}" ]; then
-    echo "BORG_PASSPHRASE=${BORG_PASSPHRASE}" > "$ENV_FILE"
-    chmod 600 "$ENV_FILE"
-    echo "Created $ENV_FILE"
-fi
+echo "Finished linking systemd files"
 
-cat << EOF > "$SYSTEMD_OVERRIDE_DIR/override.conf"
-[Service]
-EnvironmentFile=$ENV_FILE
-EOF
+echo "Restarting/starting systemd"
 
 systemctl --user daemon-reload
-systemctl --user restart borgmatic-user.timer
+systemctl --user enable --now borgmatic-user.timer
 
-echo "Finished adding BORG_PASSPHRASE to systemd"
+echo "Finished restarting/starting systemd"
