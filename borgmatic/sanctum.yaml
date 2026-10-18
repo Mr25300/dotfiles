@@ -1,4 +1,7 @@
-<<: !include [shared/defaults.yaml, shared/local.yaml]
+<<: !include
+  - shared/defaults.yaml
+  - shared/local.yaml
+  - shared/sagittarius.yaml
 
 constants:
   host: sanctum

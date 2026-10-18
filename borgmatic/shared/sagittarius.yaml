@@ -1,0 +1,3 @@
+repositories:
+  - path: ssh://sagittarius-borg/data/backups/borg/{host}-{scope}
+    label: sagittarius

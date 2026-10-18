@@ -1,4 +1,6 @@
-<<: !include shared/defaults.yaml
+<<: !include
+  - shared/defaults.yaml
+  - shared/sagittarius.yaml
 
 constants:
   host: bastion

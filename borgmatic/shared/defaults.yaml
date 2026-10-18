@@ -5,10 +5,6 @@ archive_name_format: "{host}-{scope}-{now:%Y-%m-%d-%H%M%S}"
 
 exclude_caches: true
 
-repositories:
-  - path: ssh://sagittarius-borg/data/backups/borg/{host}-{scope}
-    label: sagittarius
-
 keep_daily: 4
 keep_weekly: 3
 keep_monthly: 2
