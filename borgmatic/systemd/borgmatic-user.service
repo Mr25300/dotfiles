@@ -1,0 +1,14 @@
+[Unit]
+Description=borgmatic backup
+Wants=network-online.target
+After=network-online.target
+ConditionACPower=true
+Documentation=https://torsion.org/borgmatic/
+
+[Service]
+Type=oneshot
+Restart=no
+LogRateLimitIntervalSec=0
+ExecStartPre=sleep 1m
+ExecStart=/usr/bin/borgmatic --verbosity -2 --syslog-verbosity 1
+EnvironmentFile=%h/.config/borgmatic.d/.env
