@@ -47,6 +47,15 @@ chpwd() {
     ls
 }
 
+borgmatic() {
+    if [ -f "$XDG_CONFIG_HOME/borgmatic.d/.env" ]; then
+        set -a
+        source "$XDG_CONFIG_HOME/borgmatic.d/.env"
+        set +a
+    fi
+    command borgmatic "$@"
+}
+
 
 # SOURCING
 
