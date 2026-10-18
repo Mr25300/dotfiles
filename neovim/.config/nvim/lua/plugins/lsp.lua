@@ -52,6 +52,19 @@ return {
             }
         })
 
+        vim.lsp.config("yamlls", {
+            settings = {
+                yaml = {
+                    customTags = {
+                        "!include scalar",
+                        "!include sequence",
+                        "!include mapping"
+                    },
+                    validate = true
+                }
+            }
+        })
+
         vim.api.nvim_create_autocmd("LspAttach", {
             group = vim.api.nvim_create_augroup("UserLspConfig", {}),
             callback = function(event)
