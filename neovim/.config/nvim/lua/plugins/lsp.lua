@@ -24,6 +24,7 @@ return {
                 "jdtls",
                 "html",
                 "cssls",
+                "glslls",
                 "docker_language_server", -- Get this to work
                 "markdown_oxide",
                 "yamlls",
