@@ -44,7 +44,7 @@ alias grep='grep --color=auto'
 # FUNCTIONS
 
 chpwd() {
-    ls
+    ls --color=auto
 }
 
 borgmatic() {
